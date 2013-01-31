@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.apereo.bedework</groupId>
+	<artifactId>bw-static-content</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>Bedework Static Content Application</name>
+	<description>Overlay of Jasig Resource Server for providing static content to Bedework applications</description>
+
+	<properties>
+		<resource.server.version>1.0.28</resource.server.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.jasig.resourceserver</groupId>
+			<artifactId>resource-server-webapp</artifactId>
+			<version>${resource.server.version}</version>
+			<type>war</type>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<finalName>bw-static</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<overlays>
+						<overlay>
+							<groupId>org.jasig.resourceserver</groupId>
+							<artifactId>resource-server-webapp</artifactId>
+							<includes>
+								<!--  <include>rs/jquery/1.6.1/jquery-1.6.1.js</include> 
+								<include>**</include>-->
+								<include>WEB-INF/**</include>
+								<include>rs/jquery/1.6.4/**</include>
+								<include>rs/famfamfam/silk/**</include>
+							</includes>
+						</overlay>
+					</overlays>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
